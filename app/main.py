@@ -5,7 +5,13 @@ from fastapi import FastAPI
 from starlette.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 
+# ★ [추가 1] 우리가 만든 practice_apis.py의 라우터를 불러옵니다.
+from app.apis.practice_apis import router as practice_router
+
 app = FastAPI()
+
+# ★ [추가 2] 불러온 라우터를 FastAPI 앱에 등록합니다.
+app.include_router(practice_router)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
