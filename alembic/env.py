@@ -1,3 +1,5 @@
+
+
 import asyncio
 from logging.config import fileConfig
 
@@ -15,6 +17,11 @@ from app.core.db.databases import Base, DATABASE_URL
 
 # Model Import
 from app import models
+
+from app.core.db.database import Base  # 프로젝트 템플릿의 Base 경로
+from app.models.user import User
+from app.models.patient import Patient
+from app.models.analysis import Analysis
 
 # Alembic Config object
 config = context.config
