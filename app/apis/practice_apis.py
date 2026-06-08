@@ -90,7 +90,7 @@ def get_all_users():
     return [{"id": u["id"], "name": u["name"], "age": u["age"], "email": u["email"]} for u in user_list]
 
 # 2. 특정 회원 정보 조회
->>>>>>> 51e2125b85d054bc99a5cca7ad5f976d1aa71d4d
+
 @router.get("/users/{user_id}")
 def get_user(user_id: int):
     for user in user_list:
@@ -129,7 +129,12 @@ def delete_user(user_id: int):
             deleted_user = user_list.pop(idx)
             return {"message": "User deleted successfully", "user": deleted_user}
     raise HTTPException(status_code=404, detail="User not found")
-=======
+
+# 2단계: 깃 충돌 해결 과정에서 꼬여서 지워졌던 회원 조회 API 복구
+@router.get("/{user_id}")  # (혹은 기존에 작성하셨던 데코레이터)
+def get_user(user_id: int):
+    for user in user_list:
+        if user["id"] == user_id:
             return {"id": user["id"], "name": user["name"], "age": user["age"], "email": user["email"]}
     raise HTTPException(status_code=404, detail="해당 ID의 회원을 찾을 수 없습니다.")
 

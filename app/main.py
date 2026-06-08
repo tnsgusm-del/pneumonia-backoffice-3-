@@ -4,23 +4,17 @@ from fastapi import FastAPI
 from starlette.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 
-
-# ★ [추가 1] 우리가 만든 practice_apis.py의 라우터를 불러옵니다.
+# 기존 실습용 api 라우터를 불러옵니다.
 from app.apis.practice_apis import router as practice_router
+# ★ [추가] Canvas에 생성해 둔 Users API 라우터를 새롭게 불러옵니다.
+from app.apis.users import router as users_router
 
-app = FastAPI()
-
-# ★ [추가] 내가 2-1에서 만든 회원관리 부서(라우터)를 가져옵니다!
-from app.apis.practice_apis import router as practice_router
-
+# FastAPI 앱 생성 (기존 코드에 중복 작성되어 꼬여 있던 선언부들을 하나로 깨끗하게 정리했습니다!)
 app = FastAPI(title="폐렴 환자 관리 백오피스")
 
-# ★ [추가] 메인 건물(app)에 회원관리 부서(라우터)를 덜컥 장착해 줍니다!
+# 메인 앱에 각각의 API 라우터들을 연동합니다.
 app.include_router(practice_router)
-
-
-# ★ [추가 2] 불러온 라우터를 FastAPI 앱에 등록합니다.
-app.include_router(practice_router)
+app.include_router(users_router)  # ★ [추가] Users API 라우터 연동 완료!
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
