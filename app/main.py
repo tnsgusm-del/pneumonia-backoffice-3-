@@ -6,11 +6,13 @@ from starlette.responses import FileResponse
 
 # ★ [추가] 내가 2-1에서 만든 회원관리 부서(라우터)를 가져옵니다!
 from app.apis.practice_apis import router as practice_router
+from app.apis.ai_predict import router as ai_predict_router
 
 app = FastAPI(title="폐렴 환자 관리 백오피스")
 
 # ★ [추가] 메인 건물(app)에 회원관리 부서(라우터)를 덜컥 장착해 줍니다!
 app.include_router(practice_router)
+app.include_router(ai_predict_router)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
